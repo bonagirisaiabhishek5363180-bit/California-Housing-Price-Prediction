@@ -1,0 +1,2 @@
+## California Housing Price Prediction
+Predict California house prices using ML. Features are preprocessed with scaling & encoding, models (Linear, Decision Tree, Random Forest) are compared via cross-validation, and the best model is saved for inference. Full EDA and pipeline included.
