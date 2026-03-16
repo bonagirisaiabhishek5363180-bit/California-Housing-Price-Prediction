@@ -1,41 +1,42 @@
 # 🏠 California Housing Price Prediction
 
-An **end-to-end Machine Learning project** that predicts **California
-housing prices** using multiple regression models. The project
-demonstrates a **complete ML pipeline including Exploratory Data
-Analysis (EDA), feature preprocessing, model training, evaluation, and
-prediction generation**.
+An **end‑to‑end Machine Learning project** that predicts **California
+housing prices** using multiple regression models and a deployed
+**Streamlit web application**.
+
+The project demonstrates a complete ML workflow:
+
+-   Exploratory Data Analysis (EDA)
+-   Data preprocessing
+-   Model training
+-   Model evaluation
+-   Model persistence
+-   Web application deployment
 
 ------------------------------------------------------------------------
 
 # 📌 Project Overview
 
-Housing prices depend on several factors such as **income levels,
-population density, house age, and geographic location**.
+Housing prices depend on factors such as:
 
-This project builds a **machine learning pipeline** to analyze these
-factors and predict **median house values in California districts**.
+-   Location
+-   Income levels
+-   Population density
+-   Housing age
+-   Proximity to the ocean
 
-The workflow follows a **real-world Data Science pipeline used in
-industry**:
+This project builds a **machine learning model using Random Forest
+Regression** to predict housing prices based on these features.
 
-1.  Data Collection
-2.  Data Cleaning
-3.  Exploratory Data Analysis (EDA)
-4.  Feature Engineering
-5.  Data Preprocessing
-6.  Model Training
-7.  Model Evaluation
-8.  Model Selection
-9.  Model Persistence
-10. Prediction on New Data
+The trained model is then deployed using **Streamlit** to create an
+interactive web application.
 
 ------------------------------------------------------------------------
 
-# 🏗️ Machine Learning Pipeline Architecture
+# 🏗️ Machine Learning Pipeline
 
-Data → Preprocessing → Feature Engineering → Model Training → Evaluation
-→ Model Selection → Saved Model → Prediction
+Dataset → Data Cleaning → EDA → Feature Engineering → Model Training →
+Evaluation → Saved Model → Streamlit Web App
 
 ------------------------------------------------------------------------
 
@@ -43,172 +44,117 @@ Data → Preprocessing → Feature Engineering → Model Training → Evaluation
 
 Dataset: **California Housing Dataset**
 
-Features used:
+Features:
 
   Feature              Description
-  -------------------- ----------------------------
+  -------------------- --------------------------
   longitude            Geographic longitude
   latitude             Geographic latitude
-  housing_median_age   Median house age
-  total_rooms          Total rooms
-  total_bedrooms       Total bedrooms
+  housing_median_age   Median age of houses
+  total_rooms          Total number of rooms
+  total_bedrooms       Total number of bedrooms
   population           Population of district
   households           Number of households
-  median_income        Median income of residents
+  median_income        Median income
   ocean_proximity      Distance from ocean
 
-Target Variable:
+Target:
 
-`median_house_value`
-
-------------------------------------------------------------------------
-
-# 📈 Exploratory Data Analysis (EDA)
-
-EDA was performed to understand patterns and relationships within the
-dataset.
-
-Key insights:
-
--   **Median income strongly correlates with house prices**
--   Houses closer to the **ocean tend to have higher values**
--   Some features required **scaling and encoding**
--   Missing values were handled during preprocessing
+median_house_value
 
 ------------------------------------------------------------------------
 
-# ⚙️ Data Preprocessing
+# 🤖 Machine Learning Model
 
-A **Scikit-learn pipeline** was created to automate preprocessing steps.
+Model used:
 
-Preprocessing steps include:
+**RandomForestRegressor**
 
--   Handling missing values
--   Standard scaling for numerical features
--   One-hot encoding for categorical features
--   Feature transformation
+Evaluation metric:
 
-Libraries used:
+**Root Mean Squared Error (RMSE)**
 
-pandas\
-numpy\
-scikit-learn\
-matplotlib\
-seaborn
+### Cross Validation Results
 
-------------------------------------------------------------------------
+Mean RMSE: **49,432**
 
-# 🤖 Machine Learning Models
+Final Test RMSE:
 
-The following models were trained and evaluated:
-
-  Model                     Description
-  ------------------------- ---------------------------
-  Linear Regression         Baseline regression model
-  Decision Tree Regressor   Non-linear model
-  Random Forest Regressor   Ensemble model
+**18,342**
 
 ------------------------------------------------------------------------
 
-# 📊 Model Performance
+# 💻 Streamlit Web Application
 
-Model performance was evaluated using **10-fold cross validation**.
+A Streamlit web app was built to allow users to **input housing features
+and get price predictions in real time**.
 
-### Random Forest Cross Validation Results
+Users can enter:
 
-  Metric               Value
-  -------------------- ------------
-  Mean RMSE            **49,432**
-  Standard Deviation   2,239
-  Minimum RMSE         45,940
-  Maximum RMSE         53,301
+-   Longitude
+-   Latitude
+-   Housing median age
+-   Total rooms
+-   Total bedrooms
+-   Population
+-   Households
+-   Median income
+-   Ocean proximity
 
-Summary:
-
-count 10\
-mean 49432.12\
-std 2239.79\
-min 45940.42\
-25% 47726.32\
-50% 49230.48\
-75% 50904.66\
-max 53301.08
+The app then uses the trained model to generate predictions.
 
 ------------------------------------------------------------------------
 
-# 🧪 Final Test Performance
+# 📷 Application Output
 
-After selecting the best model, evaluation was performed on the **test
-dataset**.
+Example prediction from the web app:
 
-Final Test RMSE = **18,342**
+Predicted House Price:
 
-This means the model predicts housing prices with an **average error of
-about \$18K**.
+**\$461,117.65**
 
-------------------------------------------------------------------------
+The application interface includes:
 
-# 🏆 Best Model
-
-Model: Random Forest Regressor\
-Evaluation Metric: RMSE\
-Test RMSE: **18,342**
-
+-   Interactive numeric inputs
+-   Dropdown for ocean proximity
+-   Predict button
+-   Real‑time price prediction output
+-   ![App Output](app_output.png)
 ------------------------------------------------------------------------
 
 # 📂 Project Structure
 
 California-Housing-Prediction
 
-data/ - housing.csv
+data/ housing.csv
 
-notebooks/ - eda_and_model_training.ipynb
+notebooks/ eda_and_model_training.ipynb
 
-models/ - housing_model.pkl
+models/ model.pkl
 
-src/ - train.py - preprocessing.py - predict.py
+app.py
 
-predictions_of_test.csv\
-requirements.txt\
+predictions_of_test.csv
+
+requirements.txt
+
 README.md
 
 ------------------------------------------------------------------------
 
-# 📊 Prediction Output
+# 🚀 Running the Web App
 
-Predictions are saved into:
-
-`predictions_of_test.csv`
-
-Example output:
-
-Actual Price \| Predicted Price\
-500001 \| 483020\
-162500 \| 221708\
-204600 \| 205706\
-159700 \| 170623\
-184000 \| 212497
-
-------------------------------------------------------------------------
-
-# 🖥️ Running the Project
-
-Clone the repository
-
-git clone
-https://github.com/yourusername/california-housing-prediction.git
-
-Install dependencies
+### Install dependencies
 
 pip install -r requirements.txt
 
-Train the model
+### Run the Streamlit app
 
-python train.py
+streamlit run app.py
 
-Run predictions
+### Open in browser
 
-python final_persistant_model.py
+http://localhost:8501
 
 ------------------------------------------------------------------------
 
@@ -218,11 +164,20 @@ python final_persistant_model.py
 -   Feature Engineering
 -   Machine Learning
 -   Model Evaluation
--   Data Preprocessing
--   Scikit-learn Pipelines
--   Model Persistence
--   Prediction Systems
+-   Model Deployment
+-   Streamlit Web Apps
+-   Data Science Workflow
 
 ------------------------------------------------------------------------
 
-⭐ If you found this project useful, consider giving it a **star**.
+# 🔮 Future Improvements
+
+-   Add model explainability (SHAP)
+-   Deploy web app online using Streamlit Cloud
+-   Improve UI design
+-   Add feature importance visualization
+
+------------------------------------------------------------------------
+
+⭐ If you found this project useful, consider giving it a **star on
+GitHub**.
