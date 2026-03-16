@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler,OneHotEncoder
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import root_mean_squared_error
+from sklearn.metrics import root_mean_squared_error,classification_report
 df=pd.read_csv("housing.csv")
 df.head()
 df.info()
@@ -65,3 +65,4 @@ random_rmses= -cross_val_score(random_model,housing_prepared,housing_labels,scor
 print("random  forest rmses")
 print(pd.Series(random_rmses).describe())
 print(f"random model rmse:{random_rmse}")
+print(f"The classification report for the random forest model is:\n{classification_report(housing_labels,random_pred)}")
