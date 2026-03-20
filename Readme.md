@@ -73,14 +73,18 @@ Model used:
 Evaluation metric:
 
 **Root Mean Squared Error (RMSE)**
+**Mean Absolute Error (MAE)**
+**R2 score (R2)**
 
 ### Cross Validation Results
 
-Mean RMSE: **49,432**
+Cross Validation result Mean RMSE: **49,432**
 
-Final Test RMSE:
+Model Single RMSE:**18,342**
 
-**18,342**
+Model MAE:**11813**
+
+Model R2:**0.97**
 
 ------------------------------------------------------------------------
 

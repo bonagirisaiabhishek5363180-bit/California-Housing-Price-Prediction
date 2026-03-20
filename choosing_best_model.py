@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler,OneHotEncoder
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import root_mean_squared_error
+from sklearn.metrics import root_mean_squared_error,mean_absolute_error,r2_score
 df=pd.read_csv("housing.csv")
 df.head()
 df.info()
@@ -49,6 +49,12 @@ linear_rmse=root_mean_squared_error(housing_labels,linear_pred)
 print("linear forest rmses")
 linear_rmses= -cross_val_score(linear_model,housing_prepared,housing_labels,scoring="neg_root_mean_squared_error",cv=10)
 print(pd.Series(linear_rmses).describe())
+linear_mae=mean_absolute_error(housing_labels,linear_pred)
+print(f"linear model rmse:{linear_rmse:.2f}")
+linear_r2=r2_score(housing_labels,linear_pred)
+print(f"linear model r2:{linear_r2:.2f}")
+
+
 desc_model=DecisionTreeRegressor(random_state=42)
 desc_model.fit(housing_prepared,housing_labels)
 desc_pred=desc_model.predict(housing_prepared)
@@ -56,7 +62,12 @@ desc_rmses= -cross_val_score(desc_model,housing_prepared,housing_labels,scoring=
 print("desc forest rmses")
 print(pd.Series(desc_rmses).describe())
 desc_rmse=root_mean_squared_error(housing_labels,desc_pred)
-print(f"descision model rmse:{desc_rmse}")
+print(f"descision model rmse:{desc_rmse:.2f}")
+desc_mae=mean_absolute_error(housing_labels,desc_pred)
+print(f"descision model mae:{desc_mae:.2f}")
+desc_r2=r2_score(housing_labels,desc_pred)
+print(f"descision model r2:{desc_r2:.2f}")
+
 random_model=RandomForestRegressor(random_state=42)
 random_model.fit(housing_prepared,housing_labels)
 random_pred=random_model.predict(housing_prepared)
@@ -64,5 +75,10 @@ random_rmse=root_mean_squared_error(housing_labels,random_pred)
 random_rmses= -cross_val_score(random_model,housing_prepared,housing_labels,scoring="neg_root_mean_squared_error",cv=10)
 print("random  forest rmses")
 print(pd.Series(random_rmses).describe())
-print(f"random model rmse:{random_rmse}")
+print(f"random model rmse:{random_rmse:.2f}")
+random_mae=mean_absolute_error(housing_labels,random_pred)
+print(f"random model mae:{random_mae:.2f}")
+random_r2=r2_score(housing_labels,random_pred)
+print(f"random model r2:{random_r2:.2f}")
+
 
