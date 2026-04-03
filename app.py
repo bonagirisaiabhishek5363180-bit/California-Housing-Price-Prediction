@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 model = joblib.load("model.pkl")
+pipeline = joblib.load("pipeline.pkl")
 
 st.title("California Housing Price Prediction")
 
@@ -32,33 +33,26 @@ if st.button("Predict Price"):
 if "show" in st.session_state:
 
     input_data = {
-        "longitude": longitude,
-        "latitude": latitude,
-        "housing_median_age": housing_median_age,
-        "total_rooms": total_rooms,
-        "total_bedrooms": total_bedrooms,
-        "population": population,
-        "households": households,
-        "median_income": median_income,
-
-        "ocean_proximity_<1H OCEAN": 0,
-        "ocean_proximity_INLAND": 0,
-        "ocean_proximity_ISLAND": 0,
-        "ocean_proximity_NEAR BAY": 0,
-        "ocean_proximity_NEAR OCEAN": 0
+    "longitude": longitude,
+    "latitude": latitude,
+    "housing_median_age": housing_median_age,
+    "total_rooms": total_rooms,
+    "total_bedrooms": total_bedrooms,
+    "population": population,
+    "households": households,
+    "median_income": median_income,
+    "ocean_proximity": ocean_proximity
     }
 
-    input_data[f"ocean_proximity_{ocean_proximity}"] = 1
     input_df = pd.DataFrame([input_data])
 
-    prediction = model.predict(input_df)
-
-    st.success(f"Predicted House Price: ${prediction[0]:,.2f}")
-
+    input_prepared = pipeline.transform(input_df)
+    prediction = model.predict(input_prepared)
+    st.success(f"Predicted House Price: ${prediction[0]:.2f}")
     st.subheader("📊 Feature Importance")
 
     important_features = model.feature_importances_
-    feature_names = input_df.columns
+    feature_names = pipeline.get_feature_names_out()
 
     feat_imp = pd.DataFrame({
         "Feature": feature_names,
