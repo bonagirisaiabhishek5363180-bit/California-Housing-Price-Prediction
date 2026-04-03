@@ -1,0 +1,19 @@
+# Core libraries
+numpy
+pandas
+
+# Visualization
+matplotlib
+seaborn
+
+# Machine Learning
+scikit-learn
+
+# Model saving/loading
+joblib
+
+# Deployment
+streamlit
+
+# automatic EDA
+ydata-profiling

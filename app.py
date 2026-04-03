@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 model = joblib.load("model.pkl")
 
@@ -25,6 +27,10 @@ ocean_proximity = st.selectbox(
 
 
 if st.button("Predict Price"):
+    st.session_state["show"] = True
+    
+if "show" in st.session_state:
+
     input_data = {
         "longitude": longitude,
         "latitude": latitude,
@@ -35,7 +41,6 @@ if st.button("Predict Price"):
         "households": households,
         "median_income": median_income,
 
-        
         "ocean_proximity_<1H OCEAN": 0,
         "ocean_proximity_INLAND": 0,
         "ocean_proximity_ISLAND": 0,
@@ -44,10 +49,23 @@ if st.button("Predict Price"):
     }
 
     input_data[f"ocean_proximity_{ocean_proximity}"] = 1
-
     input_df = pd.DataFrame([input_data])
-
 
     prediction = model.predict(input_df)
 
     st.success(f"Predicted House Price: ${prediction[0]:,.2f}")
+
+    st.subheader("📊 Feature Importance")
+
+    important_features = model.feature_importances_
+    feature_names = input_df.columns
+
+    feat_imp = pd.DataFrame({
+        "Feature": feature_names,
+        "Importance": important_features
+    }).sort_values(by="Importance", ascending=True)
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+    sns.barplot(x="Importance", y="Feature", data=feat_imp, ax=ax)
+
+    st.pyplot(fig)
