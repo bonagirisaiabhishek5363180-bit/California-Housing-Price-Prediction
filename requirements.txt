@@ -1,29 +1,7 @@
-<<<<<<< HEAD
+streamlit
 numpy
 pandas
+scikit-learn
 matplotlib
 seaborn
-scikit-learn
 joblib
-streamlit
-=======
-# Core libraries
-numpy
-pandas
-
-# Visualization
-matplotlib
-seaborn
-
-# Machine Learning
-scikit-learn
-
-# Model saving/loading
-joblib
-
-# Deployment
-streamlit
-
-# automatic EDA
-ydata-profiling
->>>>>>> 37841e7876e9b2285ea113fcc10d222dec3d638b
